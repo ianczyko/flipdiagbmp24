@@ -24,12 +24,14 @@ flipdiagbmp24:			        ; void flipdiagbmp24(void *img, int width);
         sub     eax, 1
         mul     dword [ebp-4]
         mov     esi, eax
+        add     esi, [ebp+8]
 
         ; calculate right_pixel_ptr
         mov     eax, [ebp+12]
         mul     dword [ebp-4]
         add     eax, 1
         mov     edi, eax
+        add     edi, [ebp+8]
 
 loop_row:
 
@@ -49,4 +51,5 @@ loop_col:
 ; edi - right_pixel_ptr
 ;
 ; [ebp+12] - width
+; [ebp+8] - *img
 ; [ebp-4] - padded width
