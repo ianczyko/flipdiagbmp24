@@ -54,15 +54,17 @@ int main(void) {
     void *img = entireImg + offset;
     fseek(fp, 0, SEEK_SET);
     fread(entireImg, 1, bmpSize, fp);
-
-    // // print first pixel
-    // printf("b: %d\n", *((unsigned char *)(img + 0)));
-    // printf("g: %d\n", *((unsigned char *)(img + 1)));
-    // printf("r: %d\n", *((unsigned char *)(img + 2)));
-
-    flipdiagbmp24(img, (int) width);
-
-    free(entireImg);
     fclose(fp);
+
+    flipdiagbmp24(img, (int)width);
+
+    fp = fopen(file_name, "wb");
+    if (fp == NULL) {
+        printf("An error occurred while opening the file to write.\n");
+        return 0;
+    }
+    fwrite(entireImg, 1, bmpSize, fp);
+    fclose(fp);
+    free(entireImg);
     return 0;
 }
