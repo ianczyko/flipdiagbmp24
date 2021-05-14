@@ -20,3 +20,6 @@ add_executable(
     main.c
     flipdiagbmp24.asm
 )
+
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/.gdbinit DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/images DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
