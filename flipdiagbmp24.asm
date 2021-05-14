@@ -1,16 +1,22 @@
-        bits        32
-        section     .text
-        global      flipdiagbmp24
+        bits    32
+        section .text
+        global  flipdiagbmp24
 
-        ; void flipdiagbmp24(void *img, int width);
+flipdiagbmp24:			        ; void flipdiagbmp24(void *img, int width);
+        ; prologue
+        push    ebp
+        mov     ebp, esp
+        sub     esp, 12
+        push    ebx
+        push    esi
+        push    edi
 
-flipdiagbmp24:
-	    push        ebp
-	    mov	        ebp, esp
+        mov     esi, [ebp+8]
 
-	    mov	        eax, [ebp+8]	    ;address of *img
-	    mov	        ecx, [ebp+12]	    ;width
-        nop
-
-	    pop	        ebp
-	    ret
+        ; epilogue
+        pop     edi
+        pop     esi
+        pop     ebx
+        mov     esp, ebp
+        pop     ebp
+        ret
