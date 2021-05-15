@@ -24,7 +24,7 @@ flipdiagbmp24:			        ; void flipdiagbmp24(void *img, int width);
         sub     eax, 2
         mul     dword [ebp-4]
         mov     esi, eax
-        ;add     esi, [ebp+8]           ; comment this line to make the ptr relative
+        add     esi, [ebp+8]           ; comment this line to make the ptr relative
 
         ; calculate right_pixel_ptr
         mov     eax, [ebp+12]
@@ -32,7 +32,7 @@ flipdiagbmp24:			        ; void flipdiagbmp24(void *img, int width);
         mul     dword [ebp-4]
         add     eax, 3
         mov     edi, eax
-        ;add     edi, [ebp+8]           ; comment this line to make the ptr relative
+        add     edi, [ebp+8]           ; comment this line to make the ptr relative
 
         ; prepare row iteration counter
         mov     edx, [ebp+12]
@@ -45,8 +45,17 @@ loop_row:
 
 loop_col:
         ; swap *left_pixel_ptr with *left_pixel_ptr
-        ; TODO
-        
+        ; swap two pixels at once (2 bytes)
+        mov     ax, [esi]
+        mov     bx, [edi]
+        mov     [esi], bx
+        mov     [edi], ax
+        ; swap remaining pixel (1 byte)
+        mov     al, [esi+2]
+        mov     ah, [edi+2]
+        mov     [esi+2], ah
+        mov     [edi+2], al
+
         ; update left_pixel_ptr
         sub     esi, 3
 
