@@ -34,10 +34,24 @@ flipdiagbmp24:			        ; void flipdiagbmp24(void *img, int width);
         mov     edi, eax
         add     edi, [ebp+8]
 
-loop_row:
+        ; prepare row iteration counter
+        mov     edx, [ebp+12]
+        sub     edx, 1
 
+loop_row:
+        ; prepare column iteration counter
+        mov     ecx, [ebp+12]
+        sub     ecx, edx
+        
 loop_col:
 
+        ; end loop_col
+        dec     ecx
+        jnz     loop_col
+
+        ; end loop_row
+        dec     edx
+        jnz     loop_row
 
         ; epilogue
         pop     edi
@@ -48,6 +62,8 @@ loop_col:
         ret
 
 ; === variables ===
+; ecx - column iteration counter
+; edx - row iteration counter
 ; esi - left_pixel_ptr
 ; edi - right_pixel_ptr
 ;
