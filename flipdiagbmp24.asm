@@ -7,7 +7,7 @@ flipdiagbmp24:
         ; prologue
         push    ebp
         mov     ebp, esp
-        sub     esp, 12
+        sub     esp, 4
         push    ebx
         push    esi
         push    edi
