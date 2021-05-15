@@ -1,30 +1,34 @@
 # flipdiagbmp24
+An x86 assembly module that "flips" a 24bpp square BMP image diagonally.
+
+The flipdiagbmp24 procedure has the following declaration acessible for the ANSI C driver module:
+
 ```c
 void flipdiagbmp24(void *img, int width);
 ````
-Odbicie lustrzane kwadratowego obrazu .BMP w formacie 24bpp względem przekątnej.
 
-## Dodatkowe informacje
+## Setup
 
-Projekt wykonywany w domu, oddawany w czasie sesji laboratoryjnych.
-Napisać program działający pod kontrolą systemu Linux, składający się z głównego modułu w
-języku ANSI C, zapewniającego wejście i wyjście oraz modułu asemblerowego realizującego
-przetwarzanie danych. Treść zadania zawiera deklarację funkcji asemblerowej widzianą na
-poziomie języka C. Do asemblacji używamy asemblera NASM (nasm.sf.net). Kompilacja
-i konsolidacja następuje przy użyciu drivera kompilatora CC.
-Projekt powinien być przygotowany w dwóch wersjach – 32- i 64-bitowej. Z uwagi na dostępność
-większej liczby rejestrów wersja 64-bitowa powinna korzystać z mniejszej liczby zmiennych na
-stosie w pamięci. Ocena za jedną (dowolną) wersję – 6 punktów, za drugą – 2 punkty. Dane 32-
-bitowe powinny być w wersji 64-bitowej traktowane jako 32-bitowe – jedynie operacje na adresach
-są 64 bitowe.
-Argumenty dla programu powinny być zadawane w linii polecenia, w celu ułatwienia testowania.
-Moduł asemblerowy nie powinien wywoływać funkcji z biblioteki języka C. Argumenty dla
-procedur operujących na bitach powinny być zadawane przez użytkownika w postaci
-szesnastkowej. Procedury przetwarzające obrazy w formacie .BMP mogą otrzymywać jako
-argument wskaźnik na bufor zawierający cały plik albo wskaźnik na samą strukturę obrazu i
-informację o jego rozmiarach w postaci dwóch argumentów całkowitoliczbowych. Jeśli nie
-zaznaczono inaczej, procedura powinna poprawnie przetwarzać obraz o dowolnych rozmiarach.
-Należy unikać sekwencji skoków, zwłaszcza skoków bezwarunkowych następujących bezpośrednio
-po skokach warunkowych. Próba oddania projektu jawnie niezgodnego konwencję wołania
-powoduje stratę jednego punktu.
-Przyporządkowanie projektów zgodnie z pozycjami na załączonej wyżej liście studentów
+Compile:
+```
+mkdir build ; cd $_
+cmake ..
+make
+```
+Run:
+```
+./main
+```
+
+Debugging (flipdiagbmp24 module specific gdb options are saved in .gdbinit):
+```
+gdb main
+```
+## Example output
+Before diagonal flip | After diagonal flip
+--- | ---
+![512x512.bmp](images/512x512.bmp) | ![512x512_flipped.bmp](images/512x512_flipped.bmp)
+
+Before diagonal flip | After diagonal flip
+--- | ---
+![300x300.bmp](images/300x300.bmp) | ![300x300_flipped.bmp](images/300x300_flipped.bmp)
