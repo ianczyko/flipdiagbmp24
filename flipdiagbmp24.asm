@@ -1,8 +1,9 @@
         bits    32
         section .text
         global  flipdiagbmp24
+        ; void flipdiagbmp24(void *img, int width);
 
-flipdiagbmp24:			        ; void flipdiagbmp24(void *img, int width);
+flipdiagbmp24:			        
         ; prologue
         push    ebp
         mov     ebp, esp
@@ -24,7 +25,7 @@ flipdiagbmp24:			        ; void flipdiagbmp24(void *img, int width);
         sub     eax, 2
         mul     dword [ebp-4]
         mov     esi, eax
-        add     esi, [ebp+8]           ; comment this line to make the ptr relative
+        add     esi, [ebp+8]
 
         ; calculate right_pixel_ptr
         mov     eax, [ebp+12]
@@ -32,7 +33,7 @@ flipdiagbmp24:			        ; void flipdiagbmp24(void *img, int width);
         mul     dword [ebp-4]
         add     eax, 3
         mov     edi, eax
-        add     edi, [ebp+8]           ; comment this line to make the ptr relative
+        add     edi, [ebp+8]
 
         ; prepare row iteration counter
         mov     edx, [ebp+12]
