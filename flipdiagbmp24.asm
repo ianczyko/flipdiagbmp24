@@ -44,10 +44,14 @@ loop_row:
         sub     ecx, edx
 
 loop_col:
-
-
+        ; swap *left_pixel_ptr with *left_pixel_ptr
+        ; TODO
+        
         ; update left_pixel_ptr
         sub     esi, 3
+
+        ; update right_pixel_ptr
+        add     edi, [ebp-4]
 
         ; end loop_col
         dec     ecx
@@ -60,6 +64,11 @@ loop_col:
         sub     esi, [ebp-4]
         lea     eax, [eax+eax*2]
         add     esi, eax
+
+        ; update right_pixel_ptr on row change
+        mov     edi, esi
+        add     edi, 3
+        add     edi, [ebp-4]
 
         ; end loop_row
         dec     edx
