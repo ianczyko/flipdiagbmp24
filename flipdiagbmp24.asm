@@ -29,7 +29,7 @@ flipdiagbmp24:			        ; void flipdiagbmp24(void *img, int width);
         ; calculate right_pixel_ptr
         mov     eax, [ebp+12]
         mul     dword [ebp-4]
-        add     eax, 1
+        add     eax, 3
         mov     edi, eax
         add     edi, [ebp+8]
 
