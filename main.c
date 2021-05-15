@@ -6,12 +6,13 @@ extern void flipdiagbmp24(void *img, int width);
 
 int main(void) {
     FILE *fp;
-    char file_name[128] = "../images/3x3.bmp";
-    // // Load filename from stdin
-    // char file_name[128];
-    // printf("Enter filename... ");
-    // fgets(file_name, 128, stdin);
-    // file_name[strcspn(file_name, "\n")] = 0;
+    // Load filename from stdin
+    char file_name[128];
+    printf("Enter filename... ");
+    fgets(file_name, 128, stdin);
+    file_name[strcspn(file_name, "\n")] = 0;
+    // Hardcoded filename option for debugging
+    // char file_name[128] = "images/5x5.bmp";
     fp = fopen(file_name, "rb");
     if (fp == NULL) {
         printf("File not found.\n");
@@ -45,10 +46,6 @@ int main(void) {
 
     fseek(fp, 10, SEEK_SET);
     fread(&offset, 4, 1, fp);
-
-    printf("width: %d\n", width);
-    printf("size: %d\n", bmpSize);
-    printf("offset: %d\n", offset);
 
     void *entireImg = malloc(bmpSize);
     void *img = entireImg + offset;
