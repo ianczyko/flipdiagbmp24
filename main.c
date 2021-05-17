@@ -4,16 +4,13 @@
 
 extern void flipdiagbmp24(void *img, int width);
 
-int main(void) {
+int main(int argc, const char *argv[]) {
+    if (argc != 2) {
+        printf("Please provide a filename e.g. images/5x5.bmp");
+        return 0;
+    }
     FILE *fp;
-    // Load filename from stdin
-    char file_name[128];
-    printf("Enter filename... ");
-    fgets(file_name, 128, stdin);
-    file_name[strcspn(file_name, "\n")] = 0;
-    // Hardcoded filename option for debugging
-    // char file_name[128] = "images/5x5.bmp";
-    fp = fopen(file_name, "rb");
+    fp = fopen(argv[1], "rb");
     if (fp == NULL) {
         printf("File not found.\n");
         return 0;
@@ -55,7 +52,7 @@ int main(void) {
 
     flipdiagbmp24(img, (int)width);
 
-    fp = fopen(file_name, "wb");
+    fp = fopen(argv[1], "wb");
     if (fp == NULL) {
         printf("An error occurred while opening the file to write.\n");
         return 0;

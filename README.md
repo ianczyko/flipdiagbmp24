@@ -17,10 +17,10 @@ make
 ```
 Run:
 ```
-./main
+./main images/300x300.bmp
 ```
 
-Debugging (flipdiagbmp24 module specific gdb options are saved in .gdbinit):
+Debugging (setup can be found in `.gdbinit`):
 ```
 gdb main
 ```
