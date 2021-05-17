@@ -13,12 +13,11 @@ flipdiagbmp24:
         push    edi
 
         ; padded width, pw = ((width * 3 + 3) // 4) * 4
-        mov     eax, [ebp+12]
-        lea     eax, [eax+eax*2]
-        add     eax, 3
-        shr     eax, 2
-        shl     eax, 2
-        mov     ebx, eax
+        mov     ebx, [ebp+12]
+        lea     ebx, [ebx+ebx*2]
+        add     ebx, 3
+        shr     ebx, 2
+        shl     ebx, 2
 
         ; calculate left_pixel_ptr
         mov     eax, [ebp+12]
