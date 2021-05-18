@@ -72,9 +72,7 @@ loop_col:
         add     esi, eax
 
         ; update right_pixel_ptr on row change
-        mov     edi, esi
-        add     edi, 3
-        add     edi, ebx
+        lea     edi, [esi+ebx+3]
 
         ; end loop_row
         dec     edx
@@ -84,7 +82,6 @@ loop_col:
         pop     edi
         pop     esi
         pop     ebx
-        mov     esp, ebp
         pop     ebp
         ret
 
