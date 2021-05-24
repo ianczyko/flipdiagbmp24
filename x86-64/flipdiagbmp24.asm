@@ -7,35 +7,35 @@ flipdiagbmp24:
         ; prologue
 
         ; padded width, pw = ((width * 3 + 3) // 4) * 4
-        mov     r8, rsi
-        lea     r8, [r8+r8*2]
-        add     r8, 3
-        shr     r8, 2
-        shl     r8, 2
+        mov     r8d, esi
+        lea     r8d, [r8d+r8d*2]
+        add     r8d, 3
+        shr     r8d, 2
+        shl     r8d, 2
 
         ; calculate left_pixel_ptr
-        mov     rax, rsi
-        sub     rax, 2
-        mul     r8
+        mov     eax, esi
+        sub     eax, 2
+        mul     r8d
         mov     r9, rax
         add     r9, rdi
 
         ; calculate right_pixel_ptr
-        mov     rax, rsi
-        sub     rax, 1
-        mul     r8
-        add     rax, 3
+        mov     eax, esi
+        sub     eax, 1
+        mul     r8d
+        add     eax, 3
         mov     r10, rax
         add     r10, rdi
 
         ; prepare row iteration counter
-        mov     rdx, rsi
-        sub     rdx, 1
+        mov     edx, esi
+        sub     edx, 1
 
 loop_row:
         ; prepare column iteration counter
-        mov     rcx, rsi
-        sub     rcx, rdx
+        mov     ecx, esi
+        sub     ecx, edx
 
 loop_col:
         ; swap *left_pixel_ptr with *left_pixel_ptr
@@ -55,32 +55,32 @@ loop_col:
         add     r10, r8
 
         ; end loop_col
-        dec     rcx
+        dec     ecx
         jnz     loop_col
 
         ; update left_pixel_ptr on row change
-        mov     rax, rsi
-        sub     rax, rdx
-        add     rax, 1
+        mov     eax, esi
+        sub     eax, edx
+        add     eax, 1
         sub     r9, r8
-        lea     rax, [rax+rax*2]
+        lea     eax, [eax+eax*2]
         add     r9, rax
 
         ; update right_pixel_ptr on row change
         lea     r10, [r9+r8+3]
 
         ; end loop_row
-        dec     rdx
+        dec     edx
         jnz     loop_row
 
         ; epilogue
         ret
 
 ; === registers / addresses ===
-; rax - pixel swap temporary register
-; r8 - padded width
-; rcx - column iteration counter
-; rdx - row iteration counter
+; eax - pixel swap temporary register
+; r8d - padded width
+; ecx - column iteration counter
+; edx - row iteration counter
 ; r9 - left_pixel_ptr
 ; r10 - right_pixel_ptr
 ;
