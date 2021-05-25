@@ -13,24 +13,21 @@ flipdiagbmp24:
 
         ; padded width, pw = ((width * 3 + 3) // 4) * 4
         mov     ebx, [ebp+12]
-        lea     ebx, [ebx+ebx*2]
-        add     ebx, 3
-        shr     ebx, 2
-        shl     ebx, 2
+        lea     ebx, [ebx+ebx*2+3]
+        and     ebx, -4
 
         ; calculate left_pixel_ptr
         mov     eax, [ebp+12]
         sub     eax, 2
-        mul     ebx
+        imul    eax, ebx
         mov     esi, eax
         add     esi, [ebp+8]
 
         ; calculate right_pixel_ptr
         mov     eax, [ebp+12]
-        sub     eax, 1
-        mul     ebx
-        add     eax, 3
-        mov     edi, eax
+        dec     eax
+        imul    eax, ebx
+        lea     edi, [eax+3]
         add     edi, [ebp+8]
 
         ; prepare row iteration counter
@@ -66,7 +63,7 @@ loop_col:
         ; update left_pixel_ptr on row change
         mov     eax, [ebp+12]
         sub     eax, edx
-        add     eax, 1
+        inc     eax
         sub     esi, ebx
         lea     eax, [eax+eax*2]
         add     esi, eax
